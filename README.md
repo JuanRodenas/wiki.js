@@ -28,6 +28,8 @@ Creamos los directorios donde se montarán los volúmenes de persistencia
 Y le damos permisos al usuario www-data
 ~~~~
       sudo usermod -a -G www-data 'YOUR_USER'
+~~~~
+~~~~
       sudo chown -R www-data:www-data /home/jrodenas/docker/wikijs/wikijs
       sudo chown -R www-data:www-data /home/jrodenas/docker/wikijs/postgres
       sudo chmod -R 775 /home/jrodenas/docker/wikijs/wikijs

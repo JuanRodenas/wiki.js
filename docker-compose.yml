@@ -10,17 +10,17 @@ services:
   mysql_wikijs:
     restart: always
     image: postgres
-    container_name: postgres_wikijs
+    container_name: postgredb
     networks:
       - internal
     environment:
       POSTGRES_DB: wiki
-      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_PASSWORD: wikipasswd
       POSTGRES_USER: wikijs
     logging:
       driver: "none"
     volumes:
-      - /home/jrodenas/docker/wikijs/postgres:/var/lib/postgres
+      - /patch/to/data/wikijs/postgres:/var/lib/postgres
     labels:
       - "traefik.enable=false"
 
@@ -33,14 +33,14 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: wikijs
-      DB_PASS: wikijsrocks
+      DB_PASS: wikipasswd
       DB_NAME: wiki
       PUID: 1000
       PGID: 1000
       TZ=Europe/Madrid
     volumes:
-      - /home/jrodenas/docker/wikijs/wikijs:/config
-      - /home/jrodenas/docker/wikijs/wikijs:/data
+      - /patch/to/data/wikijs/wikijs:/config
+      - /patch/to/data/wikijs/wikijs:/data
     labels:
       # wikijs
       - "traefik.enable=true"
@@ -48,17 +48,14 @@ services:
       - "traefik.http.routers.wikijs.entrypoints=websecure"
       - "traefik.http.routers.wikijs.tls=true"
       - "traefik.http.routers.wikijs.tls.certresolver=lets-encrypt"
-      - "traefik.http.routers.wikijs.middlewares=securedwk"
       - "traefik.http.services.wikijs.loadbalancer.server.port=3000"
       - "traefik.http.middlewares.wikijs.headers.sslredirect=true"
-      - "traefik.http.middlewares.securedwk.chain.middlewares=wikijs,lista-blanca-wikijs"
-      - "traefik.http.middlewares.lista-blanca-wikijs.ipwhitelist.sourcerange=127.0.0.1/32, 192.168.1.1/24, 10.13.13.1/32"
     networks:
-      - nextcloud
+      - proxy
       - internal
 
 networks:
-  nextcloud:
+  proxy:
     external: true
   internal:
     external: false

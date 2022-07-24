@@ -25,16 +25,6 @@ Creamos los directorios donde se montarán los volúmenes de persistencia
 mkdir /home/jrodenas/docker/wikijs/wikijs
 mkdir /home/jrodenas/docker/wikijs/postgres
 ~~~~
-Y le damos permisos al usuario www-data
-~~~~
-sudo usermod -a -G www-data 'YOUR_USER'
-~~~~
-~~~~
-sudo chown -R www-data:www-data /home/jrodenas/docker/wikijs/wikijs
-sudo chown -R www-data:www-data /home/jrodenas/docker/wikijs/postgres
-sudo chmod -R 775 /home/jrodenas/docker/wikijs/wikijs
-sudo chmod -R 775 /home/jrodenas/docker/wikijs/postgres
-~~~~
 
 Directorios:
 * **backup** Las copias de seguridad de la base de datos. Para realizar una copia de seguridad de la base de datos y almacenarla en este directorio tan solo tenéis que ejecutar el comando `sudo docker-compose exec db backup`

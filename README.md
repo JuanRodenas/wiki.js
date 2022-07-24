@@ -38,9 +38,13 @@ docker network create wikijs_internal
 ~~~~
 
 ## LEVANTAR EL CONTENEDOR DE Wiki.js
-En la misma ubicación que hemos indicado la carpeta wikijs, descargamos el `docker-compose.yml`
+En la misma ubicación que hemos indicado la carpeta wikijs, descargamos el `docker-compose.yml` o clonamos el repo:
 
 ☑️ [docker-compose.yml](https://github.com/JuanRodenas/wiki.js/blob/main/docker-compose.yml)
+
+```
+git clone "https://github.com/JuanRodenas/wiki.js.git"
+```
 
 Abra el archivo en su editor: docker-compose.yml
 ~~~
@@ -67,8 +71,8 @@ Para escoger las variables de configuración de la base de datos, podemos accede
       DB_USER: wikijs
       DB_PASS: YOUR_PASSWD
       DB_NAME: wiki
-      PUID: 1000
-      PGID: 1000
+      PUID: `UID`
+      PGID: `GID`
       TZ=Europe/Madrid
 ~~~
 
@@ -84,7 +88,7 @@ Una vez ejecutado el comando se descargarán las imagenes del docker-compose y s
 ~~~
 docker logs wikijs
 ~~~
-* Vemos todos los contenedores:
+Si desplegamos el comando en la carpeta del contenedor, podemos ver el log en vivo
 ~~~
 docker-compose logs -f
 ~~~
@@ -93,13 +97,6 @@ docker-compose logs -f
 * Acceder al contenedor de Wiki.js
 ~~~
 docker exec -u root -t -i wikijs /bin/bash
-~~~
-* Una vez que hemos accedido al contenedor, tenemos que actualizar e instalar `sudo` y `nano` para poder modificar los archivos
-~~~
-apt update && apt upgrade
-~~~
-~~~
-apt install sudo nano
 ~~~
 
 

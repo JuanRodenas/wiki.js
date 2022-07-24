@@ -35,8 +35,8 @@ services:
       DB_USER: wikijs
       DB_PASS: wikipasswd
       DB_NAME: wiki
-      PUID: 1000
-      PGID: 1000
+      PUID: UID
+      PGID: GID
       TZ=Europe/Madrid
     volumes:
       - /patch/to/data/wikijs/wikijs:/config
